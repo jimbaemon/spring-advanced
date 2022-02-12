@@ -3,6 +3,7 @@ package hello.advanced.trace.stratagy;
 import org.junit.jupiter.api.Test;
 
 import hello.advanced.trace.stratagy.code.strategy.ContextV1;
+import hello.advanced.trace.stratagy.code.strategy.Strategy;
 import hello.advanced.trace.stratagy.code.strategy.StrategyLogic1;
 import hello.advanced.trace.stratagy.code.strategy.StrategyLogic2;
 import hello.advanced.trace.template.code.AbstractTemplate;
@@ -85,6 +86,19 @@ public class ContextV1Test {
 
 		StrategyLogic2 strategyLogic2 = new StrategyLogic2();
 		ContextV1 context2 = new ContextV1(strategyLogic2);
+		context2.execute();
+	}
+
+	@Test
+	void strategyV2(){
+		Strategy strategyLogic1 = () -> log.info("익명 내부클래스 로직 1");
+		ContextV1 context1 = new ContextV1(strategyLogic1);
+		log.info("strategyLogic1={}", strategyLogic1.getClass());
+		context1.execute();
+
+		Strategy strategyLogic2 = () -> log.info("익명 내부클래스 로직 2");
+		ContextV1 context2 = new ContextV1(strategyLogic2);
+		log.info("strategyLogic2={}", strategyLogic2.getClass());
 		context2.execute();
 	}
 }
